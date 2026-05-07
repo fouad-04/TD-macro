@@ -1,0 +1,460 @@
+
+<h2 class="sr-only">Explication complète et pédagogique du TD de macroéconomie — comptes des agents et modèle keynésien</h2>
+<style>
+* { box-sizing: border-box; }
+.nav { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 1.2rem; }
+.nb2 { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 7px 12px; font-size: 12px; cursor: pointer; color: var(--color-text-primary); }
+.nb2:hover { background: var(--color-background-tertiary); }
+.nb2.on { background: #EEEDFE; border-color: #AFA9EC; color: #3C3489; font-weight: 500; }
+.sec { display: none; }
+.sec.vis { display: block; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: .9rem; }
+.lbl { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-bottom: 8px; font-weight: 500; }
+.ld { background: #E1F5EE; color: #085041; }
+.lp { background: #EEEDFE; color: #3C3489; }
+.lr { background: #E6F1FB; color: #0C447C; }
+.lw { background: #FAEEDA; color: #633806; }
+.lc { background: #FAECE7; color: #993C1D; }
+.lg { background: #EAF3DE; color: #27500A; }
+.ttl { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 6px; }
+.tx { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 3px 0; }
+.fml { background: #E6F1FB; border: 0.5px solid #85B7EB; border-radius: var(--border-radius-md); padding: 8px 14px; text-align: center; font-size: 14px; font-weight: 500; color: #0C447C; margin: 8px 0; }
+.ok { background: #EAF3DE; border-left: 3px solid #639922; border-radius: 0; padding: 7px 12px; margin: 7px 0; font-size: 13px; color: #27500A; }
+.wrn { background: #FAECE7; border-left: 3px solid #D85A30; border-radius: 0; padding: 7px 12px; margin: 7px 0; font-size: 13px; color: #993C1D; }
+.tip { background: #FAEEDA; border-left: 3px solid #EF9F27; border-radius: 0; padding: 7px 12px; margin: 7px 0; font-size: 13px; color: #633806; }
+.st { display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start; }
+.sn { min-width: 22px; height: 22px; background: #7F77DD; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+.sn2 { min-width: 22px; height: 22px; background: #1D9E75; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+.sn3 { min-width: 22px; height: 22px; background: #D85A30; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+.stx { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.stitle { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 7px; }
+table.t { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+table.t th { background: var(--color-background-secondary); padding: 6px 8px; text-align: center; font-weight: 500; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+table.t td { padding: 5px 8px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+table.t tr.total td { font-weight: 500; color: var(--color-text-primary); background: #EEEDFE; }
+table.t tr.ok-row td { color: #27500A; background: #EAF3DE; }
+.compte-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 8px 0; font-size: 12px; }
+.compte-head { background: var(--color-background-secondary); padding: 5px 8px; font-weight: 500; font-size: 11px; color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+.compte-cell { background: var(--color-background-primary); padding: 5px 8px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+.compte-total { background: #EEEDFE; padding: 5px 8px; font-weight: 500; color: #3C3489; border: 0.5px solid #AFA9EC; }
+.badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; margin-left: 4px; vertical-align: middle; }
+.b-p { background: #EEEDFE; color: #3C3489; }
+.b-g { background: #EAF3DE; color: #27500A; }
+.b-r { background: #FAECE7; color: #993C1D; }
+.big { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+.section-break { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1rem 0; }
+</style>
+
+<div style="padding:1rem 0">
+<div class="nav">
+  <button class="nb2 on" onclick="sw('pourquoi')">Pourquoi les comptes ?</button>
+  <button class="nb2" onclick="sw('ex7')">Ex 7 — Comptes complets</button>
+  <button class="nb2" onclick="sw('k1')">Keynes Ex 1</button>
+  <button class="nb2" onclick="sw('k2')">Keynes Ex 2</button>
+  <button class="nb2" onclick="sw('k3')">Keynes Ex 3</button>
+</div>
+
+<!-- ============== POURQUOI LES COMPTES ============== -->
+<div id="s-pourquoi" class="sec vis">
+  <p class="stitle">Lach kandiru les comptes des secteurs institutionnels ?</p>
+
+  <div class="card">
+    <span class="lbl ld">L'idée de base — kifasch kayfekker le comptable national</span>
+    <p class="ttl">L'économie = un grand ménage collectif</p>
+    <p class="tx">Khyal ma3ak li 3andek entreprise. F nhayat kol shahr, katshuf : sh7al dkhalt, sh7al sraft, sh7al twebqa. Hada huwa l'esprit dyal les comptes macroéconomiques — laken 3la mustawa dyal l'économie kamla.</p>
+    <p class="tx">Le but = <strong>savoir qui produit quoi, men fin jat l'flus, wين msha.</strong></p>
+  </div>
+
+  <div class="card">
+    <span class="lbl lp">La séquence logique des comptes</span>
+    <p class="ttl">Kol compte kayjaouab 3la so'al mo7adad</p>
+    <div class="st"><div class="sn">1</div><div class="stx"><strong>Compte de production</strong> → So'al : sh7al waldna mn richesse ? (VAB = Production − CI)</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx"><strong>Compte d'exploitation</strong> → So'al : kifasch twaза3 had l'richesse (salaires, profits...) ? (EBE = VAB − Salaires − Impôts + Subventions)</div></div>
+    <div class="st"><div class="sn">3</div><div class="stx"><strong>Compte de revenu/distribution</strong> → So'al : shnuma wasal lkol agent bacha ystafid ? (Revenu disponible après transferts)</div></div>
+    <div class="st"><div class="sn">4</div><div class="stx"><strong>Compte d'utilisation du revenu</strong> → So'al : kifasch sraf had le revenu ? (Consommation + Épargne)</div></div>
+    <div class="st"><div class="sn">5</div><div class="stx"><strong>Compte de capital</strong> → So'al : sh7al invest w sh7al tabqa ka surplus/déficit ? (Épargne − FBCF = capacité ou besoin de financement)</div></div>
+    <div class="ok">Hadi hi la logique : Production → Distribution → Utilisation → Financement. Kol compte kaykhdam ka "passerelle" lil compte lil jaye.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">La règle fondamentale : Emplois = Ressources</span>
+    <p class="ttl">Kol compte 3ando côté gauche (Emplois) w côté droit (Ressources)</p>
+    <div class="fml">Ressources = ce qu'on reçoit &nbsp;|&nbsp; Emplois = ce qu'on utilise</div>
+    <div class="st"><div class="sn2">R</div><div class="stx"><strong>Ressources</strong> (côté droit) : Production, salaires reçus, dividendes reçus, prestations sociales... <span class="badge b-g">ce qu'on gagne</span></div></div>
+    <div class="st"><div class="sn3">E</div><div class="stx"><strong>Emplois</strong> (côté gauche) : CI, consommation, FBCF, impôts payés, salaires versés... <span class="badge b-r">ce qu'on dépense</span></div></div>
+    <div class="tip">Le <strong>solde</strong> (la différence) passe toujours au compte suivant comme ressource. C'est ça le "chaîne" entre les comptes.</div>
+    <div class="wrn">Mnin katshuft "solde" f l'emplois → signifie que les ressources sont plus grandes → profit/épargne. Mnin katshuft "solde" f les ressources → signifie qu'on a un déficit → besoin de financement.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lw">Exemple ultra-simple — comprendre avec un ménage</span>
+    <table class="t">
+      <tr><th colspan="2">Compte de revenu (Ahmed)</th></tr>
+      <tr><th>Emplois (ce qu'Ahmed dépense)</th><th>Ressources (ce qu'Ahmed reçoit)</th></tr>
+      <tr><td>Consommation = 4000 DH</td><td>Salaire = 5000 DH</td></tr>
+      <tr class="total"><td>Épargne (solde) = 1000 DH</td><td></td></tr>
+      <tr class="ok-row"><td><strong>Total = 5000</strong></td><td><strong>Total = 5000</strong></td></tr>
+    </table>
+    <p class="tx">L'épargne = solde qui "passe" au compte de capital. C'est l'argent qu'Ahmed va investir ou placer.</p>
+    <table class="t" style="margin-top:10px">
+      <tr><th colspan="2">Compte de capital (Ahmed)</th></tr>
+      <tr><th>Emplois</th><th>Ressources</th></tr>
+      <tr><td>FBCF (il achète une voiture) = 800 DH</td><td>Épargne (venant du compte précédent) = 1000 DH</td></tr>
+      <tr class="total"><td></td><td>Capacité de financement = 200 DH</td></tr>
+      <tr class="ok-row"><td><strong>Total = 1000</strong></td><td><strong>Total = 1000</strong></td></tr>
+    </table>
+    <div class="ok">Capacité de financement = Ahmed a 200 DH de surplus → il peut prêter à d'autres. Besoin de financement = il aurait dû emprunter.</div>
+  </div>
+</div>
+
+<!-- ============== EX 7 COMPTES ============== -->
+<div id="s-ex7" class="sec">
+  <p class="stitle">Exercice 7 — Comptes complets détaillés (économie fermée)</p>
+
+  <div class="card">
+    <span class="lbl ld">Les données de départ — lire ça d'abord !</span>
+    <table class="t">
+      <tr><th>Opération</th><th>Montant</th><th>Qui paie → Qui reçoit</th></tr>
+      <tr><td>Production des entreprises (SNF)</td><td>11 054</td><td>Entreprises produisent</td></tr>
+      <tr><td>Consommation intermédiaire (CI)</td><td>4 959</td><td>Entreprises utilisent pour produire</td></tr>
+      <tr><td>Consommation finale des ménages</td><td>4 784</td><td>Ménages achètent</td></tr>
+      <tr><td>Investissement (FBCF) entreprises</td><td>1 311</td><td>Entreprises investissent</td></tr>
+      <tr><td>Salaires versés</td><td>5 178</td><td>Entreprises → Ménages</td></tr>
+      <tr><td>Dividendes versés</td><td>917</td><td>Entreprises → Ménages</td></tr>
+    </table>
+    <div class="tip">L'économie est FERMÉE (pas d'importations ni exportations) et composée de 2 agents : Entreprises (SNF) et Ménages. Pas d'État non plus.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lp">Étape 1 — Calcul de la VAB et du PIB</span>
+    <p class="ttl">Lach on calcule d'abord la VAB ?</p>
+    <p class="tx">La VAB = la <strong>richesse réellement créée</strong> par les entreprises. On enlève les CI parce que c'est de la richesse qu'on avait déjà (achetée à d'autres).</p>
+    <div class="fml">VAB = Production − Consommations intermédiaires</div>
+    <div class="fml">VAB = 11 054 − 4 959 = <strong>6 095</strong></div>
+    <p class="tx">Économie fermée + sans État → PIB = VAB = <strong>6 095</strong></p>
+    <hr class="section-break">
+    <p class="ttl">Vérification par les 3 optiques</p>
+    <div class="st"><div class="sn">P</div><div class="stx"><strong>Optique Production</strong> : VAB = 11054 − 4959 = <span style="color:#27500A;font-weight:500">6 095</span> ✓</div></div>
+    <div class="st"><div class="sn">R</div><div class="stx"><strong>Optique Revenu</strong> : Salaires + Dividendes = 5178 + 917 = <span style="color:#27500A;font-weight:500">6 095</span> ✓</div></div>
+    <div class="st"><div class="sn">D</div><div class="stx"><strong>Optique Dépense</strong> : CF + FBCF = 4784 + 1311 = <span style="color:#27500A;font-weight:500">6 095</span> ✓</div></div>
+    <div class="ok">Les 3 optiques donnent exactement 6 095. Ça confirme que la comptabilité est cohérente. C'est ça l'identité fondamentale PN = RN = DN.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Étape 2 — Compte de production des entreprises (SNF)</span>
+    <p class="tx">Ce compte répond à : <strong>"Sh7al waldna mn richesse ?"</strong></p>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>Consommation intermédiaire (CI)</td><td>4 959</td><td>Production marchande (PM)</td><td>11 054</td></tr>
+      <tr class="total"><td><strong>VAB (solde = R − E)</strong></td><td><strong>6 095</strong></td><td></td><td></td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>11 054</strong></td><td><strong>Total</strong></td><td><strong>11 054</strong></td></tr>
+    </table>
+    <div class="tip">La VAB = 6 095 est le <strong>solde du compte de production</strong>. Elle passe comme ressource au compte d'exploitation.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Étape 3 — Compte d'exploitation des entreprises (SNF)</span>
+    <p class="tx">Ce compte répond à : <strong>"Comment la richesse créée (VAB) est-elle distribuée ?"</strong></p>
+    <div class="st"><div class="sn3">!</div><div class="stx">La VAB (6095) vient du compte précédent comme ressource. Ensuite on distribue : salaires aux ménages, dividendes... Ce qui reste = EBE (profit brut des entreprises).</div></div>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>Salaires bruts versés (Rs)</td><td>5 178</td><td>VAB (venant du compte production)</td><td>6 095</td></tr>
+      <tr class="total"><td><strong>EBE (solde = R − E)</strong></td><td><strong>917</strong></td><td></td><td></td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>6 095</strong></td><td><strong>Total</strong></td><td><strong>6 095</strong></td></tr>
+    </table>
+    <div class="tip">EBE = Excédent Brut d'Exploitation = le "profit" avant impôts. Ici EBE = 917 (= les dividendes qu'elles vont verser).</div>
+    <div class="wrn">Dans cet exercice, il n'y a pas d'impôts sur les entreprises ni de subventions. Donc : EBE = VAB − Salaires = 6095 − 5178 = <strong>917</strong>. L'EBE = exactement les dividendes versés = logique !</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Étape 4 — Compte de revenu des entreprises</span>
+    <p class="tx">Ce compte montre ce que l'entreprise garde après avoir versé les dividendes.</p>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>Dividendes versés aux ménages</td><td>917</td><td>EBE (venant du compte exploitation)</td><td>917</td></tr>
+      <tr class="total"><td><strong>Revenu disponible brut (épargne)</strong></td><td><strong>0</strong></td><td></td><td></td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>917</strong></td><td><strong>Total</strong></td><td><strong>917</strong></td></tr>
+    </table>
+    <div class="ok">Épargne des entreprises = 0. Toute l'EBE est distribuée en dividendes. Les entreprises gardent rien pour s'autofinancer.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Étape 5 — Compte de capital des entreprises</span>
+    <p class="tx">Ce compte répond à : <strong>"Comment les entreprises financent-elles leur investissement ?"</strong></p>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>FBCF (investissement)</td><td>1 311</td><td>Épargne brute (venant du compte revenu)</td><td>0</td></tr>
+      <tr class="total"><td></td><td></td><td><strong>Besoin de financement (solde)</strong></td><td><strong>1 311</strong></td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>1 311</strong></td><td><strong>Total</strong></td><td><strong>1 311</strong></td></tr>
+    </table>
+    <div class="wrn">Besoin de financement = −1 311. Les entreprises investissent 1311 mais n'ont pas d'épargne → elles doivent <strong>emprunter</strong> 1311 (auprès des ménages via les banques).</div>
+  </div>
+
+  <hr class="section-break">
+
+  <div class="card">
+    <span class="lbl lw">Comptes des ménages — même logique</span>
+    <p class="ttl">Compte de revenu des ménages</p>
+    <p class="tx">Les ménages reçoivent salaires + dividendes, et dépensent en consommation. Le reste = épargne.</p>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>Consommation finale (CF)</td><td>4 784</td><td>Salaires reçus</td><td>5 178</td></tr>
+      <tr class="total"><td><strong>Épargne brute (solde)</strong></td><td><strong>1 311</strong></td><td>Dividendes reçus</td><td>917</td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>6 095</strong></td><td><strong>Total</strong></td><td><strong>6 095</strong></td></tr>
+    </table>
+    <p class="ttl" style="margin-top:12px">Compte de capital des ménages</p>
+    <table class="t">
+      <tr><th>Emplois (E)</th><th>Montant</th><th>Ressources (R)</th><th>Montant</th></tr>
+      <tr><td>FBCF des ménages</td><td>0</td><td>Épargne (1311)</td><td>1 311</td></tr>
+      <tr class="total"><td></td><td></td><td><strong>Capacité de financement</strong></td><td><strong>1 311</strong></td></tr>
+      <tr class="ok-row"><td><strong>Total</strong></td><td><strong>1 311</strong></td><td><strong>Total</strong></td><td><strong>1 311</strong></td></tr>
+    </table>
+    <div class="ok">Capacité de financement ménages = +1 311. Les ménages prêtent 1311 aux entreprises. C'est exactement ce dont les entreprises ont besoin ! Équilibre parfait : S (ménages) = I (entreprises) = 1 311.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lg">Résumé visuel — La logique des flux</span>
+    <div style="display:grid;grid-template-columns:1fr 40px 1fr;gap:6px;align-items:center;margin:10px 0">
+      <div style="background:#EEEDFE;border-radius:var(--border-radius-md);padding:10px;text-align:center">
+        <div style="font-size:11px;color:#3C3489;margin-bottom:4px">Entreprises (SNF)</div>
+        <div style="font-size:12px;color:#534AB7">Produit : 11054<br>CI : −4959<br>VAB : 6095<br>Salaires : −5178<br>Dividendes : −917<br>Épargne : 0<br>FBCF : −1311</div>
+        <div style="margin-top:6px;background:#FAECE7;border-radius:4px;padding:4px;font-size:11px;color:#993C1D">Besoin financement : −1311</div>
+      </div>
+      <div style="text-align:center;font-size:18px;color:var(--color-text-secondary)">⇄</div>
+      <div style="background:#EAF3DE;border-radius:var(--border-radius-md);padding:10px;text-align:center">
+        <div style="font-size:11px;color:#27500A;margin-bottom:4px">Ménages</div>
+        <div style="font-size:12px;color:#3B6D11">Salaires : +5178<br>Dividendes : +917<br>Revenu : 6095<br>Consommation : −4784<br>Épargne : +1311<br>FBCF : 0</div>
+        <div style="margin-top:6px;background:#EAF3DE;border-radius:4px;padding:4px;font-size:11px;color:#27500A">Capacité financement : +1311</div>
+      </div>
+    </div>
+    <div class="fml">S ménages (1311) = I entreprises (1311) → Équilibre S = I ✓</div>
+  </div>
+</div>
+
+<!-- ============== KEYNES EX 1 ============== -->
+<div id="s-k1" class="sec">
+  <p class="stitle">Keynes Ex 1 — Explication complète pas à pas</p>
+
+  <div class="card">
+    <span class="lbl ld">Les données — lire et comprendre chaque terme</span>
+    <div class="st"><div class="sn">C</div><div class="stx"><code>C = 0,75 Yd + 15</code> → La consommation dépend du revenu disponible. 0,75 = pour chaque DH dispo, on consomme 0,75 DH. 15 = consommation incompressible (même si Yd = 0).</div></div>
+    <div class="st"><div class="sn">T</div><div class="stx"><code>T = 0,20 Y</code> → L'État prélève 20% du revenu national comme impôts.</div></div>
+    <div class="st"><div class="sn">Y</div><div class="stx"><code>Yd = Y − T</code> → Le revenu disponible = revenu total moins les impôts.</div></div>
+    <div class="st"><div class="sn">I</div><div class="stx"><code>I = 90</code> → Investissement exogène fixe (les entreprises investissent 90 quoi qu'il arrive).</div></div>
+    <div class="st"><div class="sn">G</div><div class="stx"><code>G = 55</code> → Dépenses publiques exogènes fixes.</div></div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lp">Question 1 & 2 — PMC et Pmc</span>
+    <p class="ttl">D'abord, exprimer C en fonction de Y (pas Yd)</p>
+    <div class="st"><div class="sn">1</div><div class="stx">Yd = Y − T = Y − 0,20Y = Y(1−0,20) = <strong>0,80Y</strong></div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">C = 0,75 × Yd + 15 = 0,75 × 0,80Y + 15 = <strong>0,60Y + 15</strong></div></div>
+    <div class="fml">C = 0,60Y + 15</div>
+    <div class="ok"><strong>Pmc (par rapport à Y)</strong> = 0,60 → pour chaque DH de revenu national en plus, on consomme 0,60 DH.<br><strong>Pmc (par rapport à Yd)</strong> = 0,75 → pour chaque DH disponible en plus, on consomme 0,75 DH.<br><strong>PMC</strong> = C/Y → on calcule après avoir trouvé Y*.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Question 3 — Revenu d'équilibre Y*</span>
+    <p class="ttl">Lach on fait Y = C + I + G ?</p>
+    <p class="tx">C'est la condition d'équilibre keynésien : la production (Y = offre) doit égaler la demande globale (C + I + G). Si Y &gt; demande → surproduction → entreprises réduisent → Y baisse. Si Y &lt; demande → pénurie → entreprises produisent plus → Y monte.</p>
+    <div class="st"><div class="sn">1</div><div class="stx">Y = C + I + G</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">Y = (0,60Y + 15) + 90 + 55</div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Y = 0,60Y + 160</div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Y − 0,60Y = 160</div></div>
+    <div class="st"><div class="sn">5</div><div class="stx">0,40Y = 160</div></div>
+    <div class="fml">Y* = 160 / 0,40 = <strong>400</strong></div>
+    <div class="ok">PMC = C/Y* = (0,60×400 + 15) / 400 = (240+15)/400 = 255/400 = <strong>0,6375</strong>. Vérif : C+I+G = 255+90+55 = 400 = Y ✓</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lw">Question 4 — Politique de relance ΔG = +40</span>
+    <p class="ttl">Lach le multiplicateur = 2,5 (pas 5) ?</p>
+    <p class="tx">Avec l'impôt proportionnel (T = 0,20Y), une partie du revenu supplémentaire part en impôts avant d'être consommée. Donc l'effet multiplicateur est <strong>réduit</strong>.</p>
+    <div class="st"><div class="sn">1</div><div class="stx">Pmc par rapport à Y = c(1−t) = 0,75 × (1−0,20) = 0,75 × 0,80 = <strong>0,60</strong></div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">kG = 1 / (1 − 0,60) = 1 / 0,40 = <strong>2,5</strong></div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">ΔY = kG × ΔG = 2,5 × 40 = <strong>+100</strong></div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Nouveau Y* = 400 + 100 = <strong>500</strong></div></div>
+    <div class="wrn">Le plein emploi est à Y = 480. Or Y* = 500 &gt; 480. L'État a trop stimulé ! Pour atteindre exactement 480, il aurait fallu ΔG = (480−400)/2,5 = 80/2,5 = <strong>32</strong> seulement.</div>
+    <div class="ok">Résumé : G monte de 55 à 95 (+40) → Y monte de 400 à 500 (+100). Le multiplicateur amplifie l'effet par 2,5.</div>
+  </div>
+</div>
+
+<!-- ============== KEYNES EX 2 ============== -->
+<div id="s-k2" class="sec">
+  <p class="stitle">Keynes Ex 2 — Modèle simple + introduction État</p>
+
+  <div class="card">
+    <span class="lbl ld">Données : C = 2/3 Y + 2, I = 1, T = 1/3 Y</span>
+    <p class="tx">Modèle simple sans État d'abord, puis on introduit T et G.</p>
+  </div>
+
+  <div class="card">
+    <span class="lbl lp">Question 1 — Équilibre initial (sans État)</span>
+    <div class="st"><div class="sn">1</div><div class="stx">Y = C + I = (2/3 Y + 2) + 1</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">Y = 2/3 Y + 3</div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Y − 2/3 Y = 3 → Y(1 − 2/3) = 3 → Y × 1/3 = 3</div></div>
+    <div class="fml">Y* = 3 × 3 = <strong>9</strong></div>
+    <div class="fml">C* = 2/3 × 9 + 2 = 6 + 2 = <strong>8</strong></div>
+    <div class="ok">Vérif : C + I = 8 + 1 = 9 = Y ✓. Épargne S = Y − C = 9 − 8 = 1 = I ✓ (S = I)</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Question 2 — Représentation graphique</span>
+    <div style="position:relative;width:100%;height:260px">
+      <canvas id="g2chart" role="img" aria-label="Diagramme à 45 degrés — équilibre keynésien initial et après choc d'investissement"></canvas>
+    </div>
+    <p class="tx" style="margin-top:6px">Droite Y=D (45°) coupe D = C+I en E (Y*=9). Après ΔI=1, D monte → nouveau équilibre en E' (Y*=12).</p>
+  </div>
+
+  <div class="card">
+    <span class="lbl lw">Question 3 — Multiplicateur avec ΔI = 1</span>
+    <div class="st"><div class="sn">1</div><div class="stx">c = 2/3. Donc k = 1/(1−c) = 1/(1−2/3) = 1/(1/3) = <strong>3</strong></div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">ΔY = k × ΔI = 3 × 1 = <strong>+3</strong></div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Nouveau Y* = 9 + 3 = <strong>12</strong></div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Nouveau C* = 2/3 × 12 + 2 = 8 + 2 = <strong>10</strong></div></div>
+    <div class="tip">Lach le multiplicateur = 3 ? Parce que c = 2/3. Si j'investis 1 DH de plus → revenu monte de 1 → ménages consomment 2/3 → producteurs reçoivent 2/3 → ils consomment 2/3 de 2/3... Total = 1 + 2/3 + 4/9 + ... = 3.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lc">Question 4 — Introduction de l'État (T = 1/3 Y)</span>
+    <p class="ttl">Lach le multiplicateur baisse quand on introduit les impôts ?</p>
+    <p class="tx">L'impôt "prend" une partie du revenu avant que les ménages puissent consommer. Donc la fuite est plus grande → moins d'effet multiplicateur.</p>
+    <div class="st"><div class="sn">1</div><div class="stx">Yd = Y − T = Y − 1/3 Y = 2/3 Y</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">C = 2/3 × Yd = 2/3 × 2/3 Y + 2 = 4/9 Y + 2</div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Y = C + I + G = 4/9 Y + 2 + 1 + G = 4/9 Y + 3 + G</div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Y(1 − 4/9) = 3 + G → Y × 5/9 = 3 + G</div></div>
+    <div class="fml">kG = 1/(1 − 4/9) = 9/5 = <strong>1,8</strong></div>
+    <div class="wrn">Sans impôts k = 3. Avec impôts k = 1,8. L'impôt a réduit le multiplicateur de 3 à 1,8. Lach ? Parce que maintenant chaque DH de revenu en plus → seulement 4/9 ≈ 0,44 DH consommé (au lieu de 2/3 ≈ 0,67).</div>
+    <p class="tx" style="margin-top:8px"><strong>Pour Y* = 10 :</strong> 5/9 × 10 = 3 + G → G = 50/9 − 3 = 50/9 − 27/9 = 23/9 ≈ <strong>2,56</strong></p>
+    <div class="ok">ΔG requis pour passer à Y=10 (depuis Y=9 sans G) : ΔY = 10−9 = 1. ΔG = ΔY / kG = 1 / 1,8 = <strong>0,556</strong>. Donc G doit être ≈ 0,556.</div>
+  </div>
+</div>
+
+<!-- ============== KEYNES EX 3 ============== -->
+<div id="s-k3" class="sec">
+  <p class="stitle">Keynes Ex 3 — Budget équilibré + multiplicateur dynamique</p>
+
+  <div class="card">
+    <span class="lbl ld">Données</span>
+    <p class="tx">c = 0,8 | C₀ = 100 | I₀ = 200 | T = 0,25Y (impôt proportionnel)</p>
+    <div class="tip">Ici l'impôt est proportionnel au revenu → Yd = Y − 0,25Y = 0,75Y → la Pmc effective = 0,8 × 0,75 = 0,60</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lp">Question 1 — Budget équilibré (G = T)</span>
+    <p class="ttl">Lach on cherche G = T d'abord ?</p>
+    <p class="tx">L'État veut que ses recettes (T) = ses dépenses (G). On cherche le revenu Y pour lequel cet équilibre est réalisé automatiquement.</p>
+    <div class="st"><div class="sn">1</div><div class="stx">Yd = Y − 0,25Y = 0,75Y</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">C = 0,8 × 0,75Y + 100 = 0,60Y + 100</div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Budget équilibré → G = T = 0,25Y</div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Y = C + I + G = (0,60Y + 100) + 200 + 0,25Y</div></div>
+    <div class="st"><div class="sn">5</div><div class="stx">Y = 0,60Y + 0,25Y + 300 = 0,85Y + 300</div></div>
+    <div class="st"><div class="sn">6</div><div class="stx">Y − 0,85Y = 300 → 0,15Y = 300</div></div>
+    <div class="fml">Y* = 300 / 0,15 = <strong>2 000</strong></div>
+    <div class="ok">T = 0,25 × 2000 = <strong>500</strong>. G = <strong>500</strong> (équilibré ✓). Yd = 2000 − 500 = <strong>1 500</strong>. C = 0,8 × 1500 + 100 = 1200 + 100 = <strong>1 300</strong>.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lr">Question 2 — Calcul des multiplicateurs</span>
+    <p class="ttl">Lach la formule du multiplicateur change avec l'impôt proportionnel ?</p>
+    <p class="tx">Avec T = tY (impôt proportionnel), chaque DH de revenu en plus → seulement (1−t) DH disponible → ménages consomment c(1−t) de chaque DH supplémentaire.</p>
+    <div class="fml">kG = 1 / (1 − c(1−t)) = 1 / (1 − 0,8×0,75) = 1 / (1 − 0,60) = 1 / 0,40 = <strong>2,5</strong></div>
+    <div class="fml">kI = kG = <strong>2,5</strong> (même multiplicateur pour l'investissement)</div>
+    <div class="tip">Lach kG = kI ? Parce que G et I jouent le même rôle dans la demande globale : tous les deux sont des injections directes dans l'économie.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lw">Question 3 — Doublement de G</span>
+    <div class="st"><div class="sn">1</div><div class="stx">G initial = 500. G nouveau = 1 000. ΔG = +500.</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx">ΔY = kG × ΔG = 2,5 × 500 = <strong>+1 250</strong></div></div>
+    <div class="st"><div class="sn">3</div><div class="stx">Nouveau Y* = 2 000 + 1 250 = <strong>3 250</strong></div></div>
+    <div class="st"><div class="sn">4</div><div class="stx">Nouveau T = 0,25 × 3250 = 812,5. Nouveau G = 1000. Déficit = G − T = 1000 − 812,5 = <strong>187,5</strong></div></div>
+    <div class="wrn">Le doublement de G crée un déficit budgétaire car T monte moins vite que G (T dépend de Y, G est exogène). Le budget n'est plus équilibré.</div>
+  </div>
+
+  <div class="card">
+    <span class="lbl lc">Question 4 — Multiplicateur dynamique (le plus difficile !)</span>
+    <p class="ttl">Lach on fait ça période par période ?</p>
+    <p class="tx">Dans le modèle dynamique, <strong>C(t) dépend de Y(t−1)</strong> (le revenu de la période précédente). Donc l'effet du choc de G se propage petit à petit, pas instantanément.</p>
+    <p class="tx"><strong>Le choc :</strong> G passe de 500 à 1000 à la période 1 (ΔG = 500). Les valeurs initiales : Y₀ = 2000, C₀_cons = 1300, I = 200, G₀ = 500.</p>
+
+    <div class="st"><div class="sn">1</div><div class="stx"><strong>Période 0 (avant le choc) :</strong> Y₀ = 2000. Tout est en équilibre.</div></div>
+    <div class="st"><div class="sn">2</div><div class="stx"><strong>Période 1 :</strong> G monte à 1000. L'effet direct = ΔG = 500. Mais C dépend encore de Y₀ = 2000.<br>Y₁ = C(Y₀) + I + G₁ = (0,60×2000+100) + 200 + 1000 = 1300 + 200 + 1000 = <strong>2500</strong><br>ΔY₁ = 2500 − 2000 = <strong>500</strong></div></div>
+    <div class="st"><div class="sn">3</div><div class="stx"><strong>Période 2 :</strong> C dépend de Y₁ = 2500.<br>Y₂ = C(Y₁) + I + G = (0,60×2500+100) + 200 + 1000 = 1600 + 200 + 1000 = <strong>2800</strong><br>ΔY₂ = 2800 − 2000 = <strong>800</strong>. Accroissement période 2 = 800−500 = 300 = 0,60×500</div></div>
+    <div class="st"><div class="sn">4</div><div class="stx"><strong>Période 3 :</strong> Y₃ = 0,60×2800 + 100 + 200 + 1000 = 1680+1300 = <strong>2980</strong>. ΔY₃ = 980. Accr = +180 = 0,60×300</div></div>
+    <div class="st"><div class="sn">5</div><div class="stx"><strong>Période 4 :</strong> Y₄ = 0,60×2980 + 1300 = 1788+1300 = <strong>3088</strong>. ΔY₄ = 1088. Accr = +108 = 0,60×180</div></div>
+    <div class="st"><div class="sn">6</div><div class="stx"><strong>Période 5 :</strong> Y₅ = 0,60×3088 + 1300 = 1852,8+1300 = <strong>3152,8</strong>. ΔY₅ = 1152,8. Accr = +64,8 = 0,60×108</div></div>
+
+    <table class="t" style="margin-top:10px">
+      <tr><th>Période</th><th>Y</th><th>ΔY cumulé</th><th>Accroissement</th><th>% de l'effet final (1250)</th></tr>
+      <tr><td>0</td><td>2000</td><td>0</td><td>—</td><td>0%</td></tr>
+      <tr><td>1</td><td>2500</td><td>500</td><td>+500</td><td>40%</td></tr>
+      <tr><td>2</td><td>2800</td><td>800</td><td>+300</td><td>64%</td></tr>
+      <tr><td>3</td><td>2980</td><td>980</td><td>+180</td><td>78,4%</td></tr>
+      <tr><td>4</td><td>3088</td><td>1088</td><td>+108</td><td>87,0%</td></tr>
+      <tr><td>5</td><td>3152,8</td><td>1152,8</td><td>+64,8</td><td>92,2%</td></tr>
+      <tr class="ok-row"><td>∞</td><td>3250</td><td>1250</td><td>→ 0</td><td>100%</td></tr>
+    </table>
+
+    <div class="ok">La règle des accroissements : chaque période, l'accroissement = 0,60 × l'accroissement précédent. C'est une suite géométrique de raison 0,60. Elle converge vers 0 → l'effet multiplicateur est complet après un nombre infini de périodes, mais 90%+ est atteint dès la 5ème période.</div>
+    <div style="position:relative;width:100%;height:200px;margin-top:12px">
+      <canvas id="dynk3" role="img" aria-label="Évolution du revenu Y sur les 6 périodes après le choc sur G"></canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function sw(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('vis'));
+  document.querySelectorAll('.nb2').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('vis');
+  event.target.classList.add('on');
+  if(id==='k2' && !window.g2done) setTimeout(buildG2, 100);
+  if(id==='k3' && !window.g3done) setTimeout(buildG3, 100);
+}
+
+function buildG2(){
+  window.g2done=true;
+  const ctx=document.getElementById('g2chart').getContext('2d');
+  const xs=[0,3,6,9,12,15];
+  new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:xs,
+      datasets:[
+        {label:'Y = D (45°)',data:xs.map(x=>x),borderColor:'#888780',borderWidth:1.5,pointRadius:0,borderDash:[4,3]},
+        {label:'D = 2/3Y + 3 (initial)',data:xs.map(x=>2/3*x+3),borderColor:'#7F77DD',borderWidth:2,pointRadius:0},
+        {label:'D = 2/3Y + 4 (après ΔI=1)',data:xs.map(x=>2/3*x+4),borderColor:'#1D9E75',borderWidth:2,pointRadius:0,borderDash:[5,3]},
+        {label:'Y*=9',data:[{x:9,y:9}],type:'scatter',pointBackgroundColor:'#7F77DD',pointRadius:6,showLine:false},
+        {label:'Y*=12',data:[{x:12,y:12}],type:'scatter',pointBackgroundColor:'#1D9E75',pointRadius:6,showLine:false}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{font:{size:11},color:'#888780',boxWidth:20}}},scales:{x:{title:{display:true,text:'Y (revenu)',color:'#888780',font:{size:11}},ticks:{color:'#888780',font:{size:10}}},y:{title:{display:true,text:'C, D',color:'#888780',font:{size:11}},ticks:{color:'#888780',font:{size:10}}}}}
+  });
+}
+
+function buildG3(){
+  window.g3done=true;
+  const ctx=document.getElementById('dynk3').getContext('2d');
+  new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:['0','1','2','3','4','5','∞'],
+      datasets:[{
+        label:'Y par période',
+        data:[2000,2500,2800,2980,3088,3152.8,3250],
+        borderColor:'#7F77DD',backgroundColor:'rgba(127,119,221,0.08)',
+        borderWidth:2,pointBackgroundColor:'#7F77DD',pointRadius:4,fill:true,tension:0.3
+      },{
+        label:'Y* final (3250)',
+        data:[3250,3250,3250,3250,3250,3250,3250],
+        borderColor:'#1D9E75',borderWidth:1,borderDash:[4,3],pointRadius:0
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{font:{size:11},color:'#888780',boxWidth:16}}},scales:{y:{min:1900,ticks:{color:'#888780',font:{size:10},callback:v=>v.toLocaleString()}},x:{ticks:{color:'#888780',font:{size:10}}}}}
+  });
+}
+</script>
